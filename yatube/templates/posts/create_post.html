@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {% if is_edit %}
+    Изменить пост
+  {% else %}
+    Создать новый пост
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+{% load user_filters %}
+  <div class="row justify-content-center">
+    <div class="col-md-8 p-5">
+      <div class="card">
+        <div class="card-header"> 
+          {% if is_edit %}
+            Изменить пост
+          {% else %}
+            Создать новый пост
+          {% endif %}            
+        </div>
+        <div class="card-body">     
+          {% if is_edit %}
+            {% include 'includes/form.html' with button_name='Изменить пост' %}
+          {% else %}
+            {% include 'includes/form.html' with button_name='Создать новый пост' %}
+          {% endif %} 
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

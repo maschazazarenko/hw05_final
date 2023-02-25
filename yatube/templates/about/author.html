@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Об авторе проекта{% endblock %}
+
+{% block content %}
+  <article>
+    <h1>Привет! Меня зовут Мария. Я автор проекта Yatube.</h1>
+    <p>
+      Раскажу немного о себе. Мне 22 года. Я заканчиваю исторический факультет университета. 
+    </p>
+    <p>
+      По жизни активная, целеустремленная. Занимаюсь оригами, увлекаюсь сборкой головоломок на скорость.  
+    </p>
+    <p>
+      Люблю выходить из зоны комфорта. Собственно, поэтому и создала этот блог. Это мой первый опыт программирования. Но уже не плохой и очень интересный. 
+    </p>
+    <img src="{% static 'img/foto/my2.jpg' %}" width="241" height="428" class="d-inline-block align-top" alt="">
+    <img src="{% static 'img/foto/my.jpg' %}" width="640" height="428" class="d-inline-block align-top" alt="">
+    <img src="{% static 'img/foto/my1.jpg' %}" width="396" height="428" class="d-inline-block align-top" alt="">
+  </article>
+{% endblock %} 
