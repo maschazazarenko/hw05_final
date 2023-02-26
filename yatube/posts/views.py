@@ -1,16 +1,15 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Follow, Comment, Group, Post, User
+from .models import Follow, Group, Post, User
 from .forms import CommentForm, PostForm
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from posts.utils import get_paginator
 from django.views.decorators.cache import cache_page
 
 
-CACHE = 20
+CACHE_TiMEOUT = 20
 
 
-@cache_page(CACHE, key_prefix="index_page")
+@cache_page(CACHE_TiMEOUT, key_prefix="index_page")
 def index(request):
     """
     Отображение главной страницы блога. Переменная "Post"
@@ -42,7 +41,6 @@ def group_posts(request, slug):
     return render(request, 'posts/group_list.html', context, slug)
 
 
-@csrf_exempt
 def profile(request, username):
     """
     Отображение записей конкретного автора.
@@ -66,8 +64,8 @@ def post_detail(request, post_id):
     Выводит подробную информацию о выбранном посте.
     """
     post = get_object_or_404(Post, id=post_id)
-    form = CommentForm(request.POST or None)
-    comments = Comment.objects.filter(post=post)
+    form = CommentForm()
+    comments = post.comments.all()
     context = {
         'post': post,
         'form': form,
@@ -126,6 +124,10 @@ def post_edit(request, post_id):
 
 @login_required
 def add_comment(request, post_id):
+    """
+    Позволяет зарегистрированному пользователю
+    оставлять коментарии к записям.
+    """
     form = CommentForm(request.POST or None)
     post = get_object_or_404(Post, id=post_id)
     if form.is_valid():
@@ -161,5 +163,5 @@ def profile_follow(request, username):
 def profile_unfollow(request, username):
     """Система отписки от автора."""
     author = get_object_or_404(User, username=username)
-    Follow.objects.get(user=request.user, author=author).delete()
+    author.following.filter(user=request.user).delete()
     return redirect("posts:follow_index")

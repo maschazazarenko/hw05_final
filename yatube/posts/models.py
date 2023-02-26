@@ -87,10 +87,8 @@ class Comment(CreatedModel):
     )
     post = models.ForeignKey(
         'Post',
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        related_name='coments',
+        on_delete=models.CASCADE,
+        related_name='comments',
         verbose_name='Пост',
     )
 
@@ -118,3 +116,11 @@ class Follow(models.Model):
         on_delete=models.CASCADE,
         related_name='follower',
     )
+
+    class Meta:
+        """Уникальное значение для сочетания автор-подписчик."""
+        constraints = [
+            models.UniqueConstraint(
+                fields=['author', 'user'], name='unique_follow'
+            )
+        ]
