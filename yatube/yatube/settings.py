@@ -26,8 +26,8 @@ SECRET_KEY = 'f(qk5-gp*yb2xkgg+ztbu!nzp@(^$(4b8a_x-ue$z)z2wi8bbk'
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'www.anikelll.pythonanywhere.com',
-    'anikelll.pythonanywhere.com',
+    'www.anikel.pythonanywhere.com',
+    'anikel.pythonanywhere.com',
     'localhost',
     '127.0.0.1',
     '[::1]',
