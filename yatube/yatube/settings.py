@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'f(qk5-gp*yb2xkgg+ztbu!nzp@(^$(4b8a_x-ue$z)z2wi8bbk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'www.anikel.pythonanywhere.com',
